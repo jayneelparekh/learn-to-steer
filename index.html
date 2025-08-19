@@ -78,44 +78,58 @@
 
     <!---------------------  authors --------------------->
     <div class="row">
-        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
         <p>
-          <a href="https://jayneelparekh.github.io/"><span style="font-size:19px; color:rgb(172, 138, 30)">Jayneel Parekh*</span></a>
+          <a href="https://jayneelparekh.github.io/"><span style="font-size:24px; color:rgb(172, 138, 30)">Jayneel Parekh*</span></a>
           &emsp; &emsp;
-          <a href="https://pegah-kh.github.io/"><span style="font-size:19px; color:rgb(172, 138, 30)">Pegah Khayatan*</span></a>
+          <a href="https://pegah-kh.github.io/"><span style="font-size:24px; color:rgb(172, 138, 30)">Pegah Khayatan*</span></a>
           &emsp; &emsp;
-          <a href="https://geogroup.ai/author/mustafa-shukor/"><span style="font-size:19px; color:rgb(172, 138, 30)">Mustafa Shukor</span></a>
+          <a href="https://mustafashukor.github.io/"><span style="font-size:24px; color:rgb(172, 138, 30)">Mustafa Shukor</span></a>
           &emsp; &emsp;
           <br>
-          <a href="https://geogroup.ai/author/mustafa-shukor/"><span style="font-size:19px; color:rgb(172, 138, 30)">Arnaud Dapogny</span></a>
-          &emsp; &emsp;
-          <a href="https://sites.google.com/site/alasdairnewson/"><span style="font-size:19px; color:rgb(172, 138, 30)">Alasdair Newson</span></a>
-          &emsp; &emsp;
-          <a href="https://cord.isir.upmc.fr/"><span style="font-size:19px; color:rgb(172, 138, 30)">Matthieu Cord</span></a>
+          <a href="https://www.linkedin.com/in/arnaud-dapogny-12653493/"><span style="font-size:24px; color:rgb(172, 138, 30)">Arnaud Dapogny</span></a>
+          &emsp; &nbsp;
+          <a href="https://sites.google.com/site/alasdairnewson/"><span style="font-size:24px; color:rgb(172, 138, 30)">Alasdair Newson</span></a>
+          &emsp; &emsp; &nbsp;
+          <a href="https://cord.isir.upmc.fr/"><span style="font-size:24px; color:rgb(172, 138, 30)">Matthieu Cord</span></a>
         </p>
     </div>
     
     <div class="row">
-        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-      <div class="col-md-5">
-        <center><span style="font-size:18px; color:rgb(172, 138, 30)">ISIR, Sorbonne Université, France
-        </span></center>
-      </div> 
+        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;  &emsp;
+        <p style="font-size:24px; color:rgb(172, 138, 30)">ISIR, Sorbonne Université, France </p>
     </div>
 
-    <br>
+     <div class="gap-10"></div>
 
-      <center>
-        <span style="font-size:18px">
+    <center>
+        <span style="font-size:21px">
           [<a href="https://arxiv.org/abs/2508.12815" style="color:rgb(75, 15, 101)">Paper</a>]
           &emsp; 
           [<a href="https://github.com/mshukor/xl-vlms" style="color:rgb(75, 15, 101)">Code</a>]&nbsp;
         </span>
-        </center>
+    </center>
     
     <div class="gap-10"></div>
+
     <hr>
 
+    <b><span style="font-size:36px; color:rgb(75, 15, 101)">Key Takeaways</span></b>
+    <div class="gap-10"></div>
+    
+    <ul style="font-size:19px">
+      <li> This work is on steering for multimodal LLMs (MLLMs). The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer differently depending upon input context.</li>
+      <div class="gap-10"></div>
+      <li> We first propose <b><u>Prompt-to-Steer (P2S)</u></b>, a type of contrastive steering method which demonstrates that if the behavior instantiation is known in advance, one can use input specific contrastive prompts to extract and steer the given input directly.</li>
+      <div class="gap-10"></div>
+      <li> Since P2S requires knowing the instantiation in advance it is not directly useful in practice. We then propose <b><u>Learn-to-Steer (L2S)</u></b> method that learns to predict input-specific P2S steering vectors from input context. The L2S prediction is used to steer the MLLM.</li>
+      <div class="gap-10"></div>
+      <li> We apply L2S to steer MLLMs for two different applications: safety enforcement and hallucination mitigation. Compared to the popular mean-steering approach, L2S allows for a simultaneous steering across multiple behavior instantiations.</li>
+    </ul>
+
+
+
+    For eg. safety can mean refusal for queries about harmful/illegal activities or expert deference for financial queries.
   </body>
   
 </html>
