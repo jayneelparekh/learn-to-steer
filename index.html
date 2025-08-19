@@ -110,9 +110,10 @@
         </span>
     </center>
     
-    <div class="gap-10"></div>
+    <div class="gap-20"></div>
 
     <hr>
+    <div class="gap-10"></div>
 
     <b><span style="font-size:36px; color:rgb(75, 15, 101)">Key Takeaways</span></b>
     <div class="gap-10"></div>
@@ -128,8 +129,36 @@
     </ul>
 
 
+    <div class="gap-20"></div>
 
-    For eg. safety can mean refusal for queries about harmful/illegal activities or expert deference for financial queries.
+    <hr>
+
+    <b><span style="font-size:36px; color:rgb(75, 15, 101)"> 
+      Background and Motivation
+    </span></b>
+
+    <div class="gap-10"></div>
+
+    <p style="font-size:19px">
+    <i>Representation steering</i> refers to the idea of intervening on the internal representations in order to "align" the output with certain desired behaviors. 
+       For computer vision enthusiasts, in principle, it's similar to a class of image editing approaches where one intervenes on the latent representations of image generative models to control the output "style".
+    </p>
+
+    <p style="font-size:19px">
+    For a given desired behavior (eg. sycophancy), most current steering approaches involve contrasting representations between two sets of samples, one that aligns with the given behavior, and the other that doesn't. 
+    Subsequently, one extracts mean-of-difference or difference-of-means between the two sets of representations as a single steering vector to induce desired behavior. 
+    </p>
+
+    <p style="font-size:19px">
+    The core of our proposal is that when steering for a given goal/behavior (eg. ensuring safety), it can realize itself differently for different inputs. 
+    For example, OpenAI usage policy provides a set of unsafe scenarios where a model response should not be used/relied upon. 
+    One could steer so that the model refuses a user query regardless of the scenario, which would ensure a safe response. However, safety can mean different things depending upon input context.  
+    It would entail refusal for queries asking about performing harmful/illegal activities. 
+    For queries about legal/financial/healthcare consultations, often what is more essential is not that the model refuses to answer them but that it should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
+    This can indeed be regarded as a subjective opinion about how a model should behave, and that is precisely the point!
+    This in turn motivated us to propose methods that can steer differently for a goal, taking into account the input context. 
+    </p>
+
   </body>
   
 </html>
