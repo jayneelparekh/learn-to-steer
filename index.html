@@ -154,9 +154,9 @@
     For example, OpenAI usage policy provides a set of unsafe scenarios where a model response should not be used/relied upon. 
     One could steer so that the model refuses a user query regardless of the scenario, which would ensure a safe response. However, safety can mean different things depending upon input context.  
     It would entail refusal for queries asking about performing harmful/illegal activities. 
-    For queries about legal/financial/healthcare consultations, often what is more essential is not that the model refuses to answer them but that it should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
-    This can indeed be regarded as a subjective opinion about how a model should behave, and that is precisely the point!
-    This in turn motivated us to propose methods that can steer differently for a behavior, taking into account the input context. 
+    But for legal/financial/healthcare queries, what is arguably more essential is not refusal but that response should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
+    This can be regarded as a subjective opinion about desired model behave, and that is precisely the point!
+    This motivated us to propose a method that can steer differently, according to input context. 
     </p>
 
     <div class="gap-20"></div>
@@ -231,10 +231,24 @@
       During inference, one can simply use \(g_{\Theta^*}\) to directly predict the appropriate steering vector from the input context. In our experiments \(g_{\Theta}\) is modeled as a two layer MLP with Tanh or ReLU activation.
       It is worth noting that training \(g\) is highly time and memory efficient since one directly operates in the latent space. It requires the original model \(f\) only to extract the representations via a forward pass.
       The original model is not needed during its training. In this sense, it preserves the cost and ease of application advantage of standard steering methods while offering more flexibility in steering behavior one can enforce.
+      For complete method details please refer to the main paper and appendix.
     </p>
 
-    
-    
+    <div class="gap-20"></div>
+
+    <hr>
+
+    <b><span style="font-size:36px; color:rgb(75, 15, 101)"> 
+      Experiments
+    </span></b>
+
+    <div class="gap-10"></div>
+
+    <p style="font-size:19px">
+      We test our method for safety enforcement and hallucination mitigation tasks on LLaVA-v1.5. 
+      The safety enforcement experiments are conducted on MMSafetyBench dataset, while hallucination experimnents are on primarily on POPE dataset.
+      Additional experiments with Qwen2-VL-7B-Instruct on both benchmarks, and LLaVA-v1.5 on VLGuard dataset for safety enforcement will be added soon in updated version of our paper. 
+    </p>
 
 
   </body>
