@@ -255,11 +255,15 @@
       As before, for precise details, please refer to the paper.
     </p>
 
+    <div class="gap-10"></div>
+
     <div id="safety_exps">
     <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
     Inducing Safety
     </span></b>
     </div>
+
+    <div class="gap-10"></div>
 
 
     <p style="font-size:19px">
@@ -274,9 +278,9 @@
 
     <center>
       <embed src="assets/qualitative_app_safety_2-1.png" width="880px" height="450px" />
-      <br> <br> <br>
+      <br> <br> 
       <embed src="assets/qualitative_app_safety_3-1.png" width="880px" height="450px" />
-      <br> <br> <br>
+      <br> <br>
       <embed src="assets/qualitative_app_ed_1-1.png" width="880px" height="450px" />
     </center>
 
@@ -298,7 +302,7 @@
      -->
 
 
-    <div class="gap-10"></div>
+    <div class="gap-20"></div>
 
     <div id="hallucination_exps">
     <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
@@ -306,9 +310,20 @@
     </span></b>
     </div>
 
+    <div class="gap-10"></div>
+
     <p style="font-size:19px">
-      
+      We also evaluate our method on POPE dataset for hallucination mitigation. The dataset consists of multimodal queries asking about presence of various objects in a context image.
+      The steering goal is to steer the response towards the correct answer (Yes/No) based on the input context. 
+      Note that behavior instantiation in this case is implicit and inherent in the task itself. Quantiative results (in main paper) show L2S is indeed able to reduce hallucinations to some extent (while mean-steering fails).
+      We show some qualitative examples below:
     </p>
+
+    <center>
+      <embed src="assets/pope_samples-1.png" width="800px" height="450px" />
+      <br> <br> 
+      <embed src="assets/skier_backpack-1.png" width="800px" height="450px" />
+    </center>
 
 
 
