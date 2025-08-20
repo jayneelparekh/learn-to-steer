@@ -125,7 +125,7 @@
       <div class="gap-10"></div>
       <li> Since P2S requires knowing the instantiation in advance it is not directly useful in practice. We then propose <b><u>Learn-to-Steer (L2S)</u></b> method that learns to predict input-specific P2S steering vectors from input context. The L2S prediction is used to steer the MLLM.</li>
       <div class="gap-10"></div>
-      <li> We apply L2S to steer MLLMs for two different applications: safety enforcement and hallucination mitigation. Compared to the popular mean-steering approach, L2S allows for a simultaneous steering across multiple behavior instantiations.</li>
+      <li> We apply L2S to steer MLLMs for two different applications: safety enforcement and hallucination mitigation. Compared to the popular mean-steering approach, L2S allows for simultaneous steering across multiple behavior instantiations.</li>
     </ul>
 
 
@@ -156,8 +156,23 @@
     It would entail refusal for queries asking about performing harmful/illegal activities. 
     For queries about legal/financial/healthcare consultations, often what is more essential is not that the model refuses to answer them but that it should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
     This can indeed be regarded as a subjective opinion about how a model should behave, and that is precisely the point!
-    This in turn motivated us to propose methods that can steer differently for a goal, taking into account the input context. 
+    This in turn motivated us to propose methods that can steer differently for a behavior, taking into account the input context. 
     </p>
+
+    <div class="gap-20"></div>
+
+    <hr>
+
+    <b><span style="font-size:36px; color:rgb(75, 15, 101)"> 
+      Method
+    </span></b>
+    <center>
+    <video width="810" height="480" autoplay loop muted>
+    <source src="assets/system_design_recording_v3.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+    </center>
+
 
   </body>
   
