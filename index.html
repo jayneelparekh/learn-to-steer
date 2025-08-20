@@ -186,7 +186,7 @@
     For a given multimodal input query \(X=(I, T) \), we define a pair of contrastive prompts, \( (T^+_X, T^-_X) \), that correspond to desired and undesired behaviors respectively. 
     Crucially, unlike previous steering methods, that use a fixed set of prompts for all samples, we allow use of input-specific prompts, aligned with desired behavior instantiation for the given input. 
     These prompt completions are appended to original input to create modified inputs \(X^+ = (I, T || T^+_X)\), \(X^- = (I, T || T^-_X)\). 
-    The difference between the final token representations (most often) is extracted at the steering layer \(L^*\) as the input-specific steering vector \(z_{X, L^*} \in \mathbb{R}^D\).
+    The difference between the final (generally) token residual stream representations is extracted at the steering layer \(L^*\) as the input-specific steering vector \(z_{X, L^*} \in \mathbb{R}^D\).
 
     To steer the given input one can simply apply \(z_{X, L^*}\) to shift the hidden representations at layer \(L^*\).
     </p>
@@ -197,11 +197,16 @@
 
     <br>
     <p style="font-size:19px">
-    Importantly, <b>if we know the behavior instantiation in advance</b>, P2S uses only the sample and input-specific prompt completions to extract a steering vector the given input
-    Example of such prompt completions are illustrated 
+    Importantly, <b>if we know the behavior instantiation in advance</b>, P2S uses only the sample and input-specific prompt completions to extract a steering vector the given input. 
+    Examples of such prompt completions are illustrated below
     </p>
 
-    <br>
+    <center>
+      <embed src="assets/contrastive_prompts2_harmful.png" width="700px" height="200px" />
+      <embed src="assets/contrastive_prompts2_healthcare.png" width="700px" height="210px" />
+    </center>
+
+     <br>
 
     <div id="l2s">
     <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
@@ -213,7 +218,7 @@
 
     <p style="font-size:19px">
       Since P2S requires knowing behavior instantiation in advance, to determine appropriate prompt completions \( (T^+_X, T^-_X) \), it is not particularly useful in practice. 
-      To address this limitation we propose Learn-to-Steer (L2S) that learns a model \(g_{\Theta}\) to predict the P2S steering vectors from the input context vector \(h_{X, L'}\) (last token of input at layer \(L'\)).
+      To address this limitation we propose Learn-to-Steer (L2S) that learns a model \(g_{\Theta}: \mathbb{R}^D \rightarrow \mathbb{R}^D \) to predict the P2S steering vectors from the input context vector \(h_{X, L'}\) (last token of input at layer \(L'\)).
     </p>
 
     <center style="font-size:19px">
@@ -223,10 +228,12 @@
     <br>
 
     <p style="font-size:19px">
-      During inference, one can simply use \(g_{\Theta^*}\) to directly predict the appropriate steering vector from the input context.
+      During inference, one can simply use \(g_{\Theta^*}\) to directly predict the appropriate steering vector from the input context. In our experiments \(g_{\Theta}\) is modeled as a two layer MLP with Tanh or ReLU activation.
       It is worth noting that training \(g\) is highly time and memory efficient since one directly operates in the latent space. It requires the original model \(f\) only to extract the representations via a forward pass.
-      The original model is not needed during its training. In this sense, it preserves the cost and ease of application advantage of standard steerign methods while offering more flexibility in steering behavior one can enforce.
+      The original model is not needed during its training. In this sense, it preserves the cost and ease of application advantage of standard steering methods while offering more flexibility in steering behavior one can enforce.
     </p>
+
+    
     
 
 
