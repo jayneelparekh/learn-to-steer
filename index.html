@@ -121,9 +121,9 @@
     <ul style="font-size:19px">
       <li> This work is on steering for multimodal LLMs (MLLMs). The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer differently depending upon input context.</li>
       <div class="gap-10"></div>
-      <li> We first propose <b><u>Prompt-to-Steer (P2S)</u></b>, a type of contrastive steering method which demonstrates that if the behavior instantiation is known in advance, one can use input specific contrastive prompts to extract and steer the given input directly.</li>
+      <li> We first propose <a href="#p2s" style="color:rgb(172, 138, 30)"><b><u>Prompt-to-Steer (P2S)</u></b></a>, a type of contrastive steering method which demonstrates that if the behavior instantiation is known in advance, one can use input specific contrastive prompts to extract and steer the given input directly.</li>
       <div class="gap-10"></div>
-      <li> Since P2S requires knowing the instantiation in advance it is not directly useful in practice. We then propose <b><u>Learn-to-Steer (L2S)</u></b> method that learns to predict input-specific P2S steering vectors from input context. The L2S prediction is used to steer the MLLM.</li>
+      <li> Since P2S requires knowing the instantiation in advance it is not directly useful in practice. We then propose <a href="#l2s" style="color:rgb(172, 138, 30)"><b><u>Learn-to-Steer (L2S)</u></b></a> method that learns to predict input-specific P2S steering vectors from input context. The L2S prediction is used to steer the MLLM.</li>
       <div class="gap-10"></div>
       <li> We apply L2S to steer MLLMs for two different applications: safety enforcement and hallucination mitigation. Compared to the popular mean-steering approach, L2S allows for simultaneous steering across multiple behavior instantiations.</li>
     </ul>
@@ -166,6 +166,7 @@
     <b><span style="font-size:36px; color:rgb(75, 15, 101)"> 
       Method
     </span></b>
+
     <center>
     <video width="810" height="480" autoplay loop muted>
     <source src="assets/system_design_recording_v3.mp4" type="video/mp4">
@@ -173,8 +174,50 @@
     </video>
     </center>
 
+    <div id="p2s">
+    <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
+    Prompt-to-Steer (P2S): 
+    </span></b>
+    </div>
+   
+    <br>
+
     <p style="font-size:19px">
-    For a given multimodal input query \(X=(I, T) \)
+    For a given multimodal input query \(X=(I, T) \), we define a pair of contrastive prompts, \( (T^+_X, T^-_X) \), that correspond to desired and undesired behaviors respectively. 
+    Crucially, unlike previous steering methods, that use a fixed set of prompts for all samples, we allow use of input-specific prompts, aligned with desired behavior instantiation for the given input. 
+    These prompt completions are appended to original input to create modified inputs \(X^+ = (I, T || T^+_X)\), \(X^- = (I, T || T^-_X)\). 
+    The difference between the final token representations (most often) is extracted at the steering layer \(L^*\) as the input-specific steering vector \(z_{X, L^*}\).
+
+    To steer the given input one can simply apply \(z_{X, L^*}\) to shift the hidden representations at layer \(L^*\).
+    </p>
+
+    <center style="font-size:19px">
+      \(h_{L^*}^p(X) \leftarrow h_{L^*}^p(X) + \alpha z_{X, L^*}\)
+    </center>
+
+    <br>
+    <p style="font-size:19px">
+    Importantly, if we know the behavior instantiation in advance, P2S uses only the sample and input-specific prompt completions to extract a steering vector the given input
+    Example of such prompt completions are illustrated 
+    </p>
+
+
+    <div id="l2s">
+    <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
+    Learn-to-Steer (P2S): 
+    </span></b>
+    </div>
+   
+    <br>
+
+    <p style="font-size:19px">
+    
+    </p>
+
+
+    <br>
+    <p style="font-size:19px">
+   
     </p>
     
 
