@@ -125,7 +125,7 @@
       <div class="gap-10"></div>
       <li> Since P2S requires knowing the instantiation in advance it is not directly useful in practice. We then propose <a href="#l2s" style="color:rgb(172, 138, 30)"><b><u>Learn-to-Steer (L2S)</u></b></a> method that learns to predict input-specific P2S steering vectors from input context. The L2S prediction is used to steer the MLLM.</li>
       <div class="gap-10"></div>
-      <li> We apply L2S to steer MLLMs for two different applications: safety enforcement and hallucination mitigation. Compared to the popular mean-steering approach, L2S allows for simultaneous steering across multiple behavior instantiations.</li>
+      <li> We apply L2S to steer MLLMs for two different applications: <a href="#safety_exps" style="color:rgb(172, 138, 30)">safety enforcement</a> and <a href="#hallucination_exps" style="color:rgb(172, 138, 30)">hallucination mitigation</a>. Compared to the popular mean-steering approach, L2S allows for simultaneous steering across multiple behavior instantiations.</li>
     </ul>
 
 
@@ -249,6 +249,69 @@
       The safety enforcement experiments are conducted on MMSafetyBench dataset, while hallucination experimnents are on primarily on POPE dataset.
       Additional experiments with Qwen2-VL-7B-Instruct on both benchmarks, and LLaVA-v1.5 on VLGuard dataset for safety enforcement will be added soon in updated version of our paper. 
     </p>
+
+    <p style="font-size:19px">
+      <b>Baselines:</b> The primary baseline for <b>L2S</b>, <b>P2S</b> methods is the mean-steering (<b>Mean-S</b>) method that uses \(\mathbb{E}(z_{X, L^*})\) as the fixed steering vector. 
+      As before, for precise details, please refer to the paper.
+    </p>
+
+    <div id="safety_exps">
+    <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
+    Inducing Safety
+    </span></b>
+    </div>
+
+
+    <p style="font-size:19px">
+      The MMSafetyBench dataset consists of multimodal queries designed to induce harmful responses from a model. 
+      Our safety steering goal is to avoid outputting any harmful instructions for any harmful/illegal activity, while be able to defer the user to an expert for the three scenarios. 
+    </p>
+
+    <p style="font-size:19px">
+      Quantiative experiments can be found in the paper, where the main takeaway is that L2S is able to more effectively steer simultaneously for both kind of behavior instantiations depending on the input context. 
+      Some qualitative examples illustrating this are added below:
+    </p>
+
+    <center>
+      <embed src="assets/qualitative_app_safety_2-1.png" width="880px" height="450px" />
+      <br> <br> <br>
+      <embed src="assets/qualitative_app_safety_3-1.png" width="880px" height="450px" />
+      <br> <br> <br>
+      <embed src="assets/qualitative_app_ed_1-1.png" width="880px" height="450px" />
+    </center>
+
+    <!-- 
+
+    <p style="font-size:19px">
+      <b>Metrics:</b> We use three metrics to evaluate the steered responses 
+      <ul style="font-size:18px">
+        <li> <b>Harmfulness evaluation:</b> For each steered test response, we compute a probability of it being unsafe/harmful using Llama-Guard-3-8B. We threshold these probabilities to compute the \( \textrm{Unsafe-score}(p) \) that quantifies fraction of responses with harmfulness greater than threshold \(p \in [0, 1]\). </li> 
+        <li> <b>Expert-deference score:</b> This evaluates fraction of test responses for the three scenarios where the model defers the user to an expert at some point in its output</li>
+        <li> <b>Response Quality:</b> This evaluates (using Gemini-2.0-Flash) how well the steered responses remain coherent and relevant to the context of the given image. This metric acts more like a control axis for all steering methods.</li>
+      </ul>
+    </p>
+
+    <center>
+      <embed src="assets/contrastive_prompts2_harmful.png" width="700px" height="200px" />
+      <embed src="assets/contrastive_prompts2_healthcare.png" width="700px" height="210px" />
+    </center>
+     -->
+
+
+    <div class="gap-10"></div>
+
+    <div id="hallucination_exps">
+    <b><span style="font-size:24px; color:rgb(172, 138, 30)"> 
+    Mitigating Hallucinations
+    </span></b>
+    </div>
+
+    <p style="font-size:19px">
+      
+    </p>
+
+
+
 
 
   </body>
