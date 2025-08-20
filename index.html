@@ -263,12 +263,12 @@
 
 
     <p style="font-size:19px">
-      The MMSafetyBench dataset consists of multimodal queries designed to induce harmful responses from a model. 
-      Our safety steering goal is to avoid outputting any harmful instructions for any harmful/illegal activity, while be able to defer the user to an expert for the three scenarios. 
+      Our safety steering goal here is to avoid outputting any unsafe instructions for any query (about harmful/illegal activities or otherwise), 
+      while being able to defer the user to a human expert for any legal/financial/healthcare queries (which use different prompt completions). 
     </p>
 
     <p style="font-size:19px">
-      Quantiative experiments can be found in the paper, where the main takeaway is that L2S is able to more effectively steer simultaneously for both kind of behavior instantiations depending on the input context. 
+      Quantiative experiments can be found in the paper, where the main takeaway is that L2S is able to much better at steering simultaneously for both kind of behavior instantiations depending on the input context. 
       Some qualitative examples illustrating this are added below:
     </p>
 
