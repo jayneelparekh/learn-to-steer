@@ -119,7 +119,7 @@
     <div class="gap-10"></div>
     
     <ul style="font-size:19px">
-      <li> This work is on steering for multimodal LLMs (MLLMs). The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer differently depending upon input context.</li>
+      <li> This work is on steering for multimodal LLMs (MLLMs). The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer in different directions depending upon input context.</li>
       <div class="gap-10"></div>
       <li> We first propose <a href="#p2s" style="color:rgb(172, 138, 30)"><b><u>Prompt-to-Steer (P2S)</u></b></a>, a type of contrastive steering method which demonstrates that if the behavior instantiation is known in advance, one can use input specific contrastive prompts to extract and steer the given input directly.</li>
       <div class="gap-10"></div>
@@ -150,7 +150,7 @@
 
     <p style="font-size:19px">
     For a given desired behavior (eg. sycophancy), most current steering approaches involve contrasting representations between two sets of samples, one that aligns with the given behavior, and the other that doesn't. 
-    Subsequently, one extracts mean-of-difference or difference-of-means between the two sets of representations as a single steering vector to induce desired behavior. 
+    Subsequently, one extracts mean-of-difference or difference-of-means between the two sets of representations as a single steering vector to induce desired behavior. Some cool recent work applies a steering vector conditionally. Nevertheless, the direction of steering does not change with input.
     </p>
 
     <p style="font-size:19px">
@@ -160,7 +160,7 @@
     It would entail refusal for queries asking about performing harmful/illegal activities. 
     But for legal/financial/healthcare queries, what is arguably more essential is not refusal but that response should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
     This can be regarded as a subjective opinion about desired model behave, and that is precisely the point!
-    This motivated us to propose a method that can steer differently, according to input context. 
+    This motivated us to propose a method that for a given goal, can flexibly steer in different directions, according to the input context. 
     </p>
 
     <div class="gap-20"></div>
