@@ -16,11 +16,18 @@ Steering has emerged as a practical approach to enable post-hoc guidance of LLMs
 
 ## Installation
 
-This repository is built on top of our [XL-VLMs](https://github.com/mshukor/xl-vlms) repository which contains code for our previous works on explainability and steering of multimodal LLMs. Feel free to refer to explore it if these works are also relevant for you.
+This repository is built on top of our parent [XL-VLMs](https://github.com/mshukor/xl-vlms) repository which contains code for our previous works on explainability and steering of multimodal LLMs. Feel free to refer to explore it if these works are also relevant for you.
 
 ### Environment 
 
+Please refer to [docs/installation.md](docs/installation.md) for environment installation instructions (based on the parent repo)
+
 ### Datasets
+
+* The MMSafetyBench dataset can be downloaded at [this link](https://github.com/isXinLiu/MM-SafetyBench)
+* The POPE dataset can be downloaded at [this link](https://github.com/RUCAIBox/POPE)
+
+We encourage checking out [src/datasets/image_text_dataset.py](src/datasets/image_text_dataset.py) for details about the dataset classes. The prompt completions depending upon the input are also defined there.
 
 ### Models
 
@@ -34,6 +41,12 @@ In general, owing to the parent [XL-VLMs](https://github.com/mshukor/xl-vlms) re
 
 ### Feature Extraction
 
+The extraction of features from the two prompt completions and context vectors by running the bash scripts
+* For safety experiments: [src/examples/learned_steering/L2S/safety/0_extract_representations.sh](src/examples/learned_steering/L2S/safety/0_extract_representations.sh)
+* For hallucination experiments: 
+
+
+
 ### Training L2S
 
 ### Inference 
@@ -45,7 +58,7 @@ In general, owing to the parent [XL-VLMs](https://github.com/mshukor/xl-vlms) re
 
 ## Citations
 
-If you find this repo useful, you can cite the work as follows:
+If you find this repo or our work useful, you can cite the work as follows:
 
 ```bibtex
 @article{parekh2025learning,
