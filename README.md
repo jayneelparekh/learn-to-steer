@@ -16,7 +16,7 @@ Steering has emerged as a practical approach to enable post-hoc guidance of LLMs
 
 ## Installation
 
-This repository is built on top of our parent [XL-VLMs](https://github.com/mshukor/xl-vlms) repository which contains code for our previous works on explainability and steering of multimodal LLMs. Feel free to refer to explore it if these works are also relevant for you.
+This repository is built on top of our parent [XL-VLMs](https://github.com/mshukor/xl-vlms) repository which contains code for our previous works on explainability and steering of multimodal LLMs. Feel free to refer/explore it if these works are also relevant for you.
 
 ### Environment 
 
@@ -69,16 +69,16 @@ L2S network architecture and their training strategy is given in [src/analysis/l
 Given a pretrained L2S model, inference can be performed with the following bash scripts
 ```
 bash src/examples/learned_steering/L2S/safety/2_inference_with_l2s.sh
-OR 
-
+bash src/examples/learned_steering/L2S/hallucination/2_inference_with_l2s.sh
 ```
-
 
 
 ### Evaluation
 
-
-
+Given a file containing generated responses, use the following bash scripts for evaluation for safety experiments
+```
+bash src/examples/learned_steering/L2S/safety/3_response_eval.sh
+```
 
 ## Citations
 
