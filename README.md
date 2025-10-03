@@ -41,15 +41,38 @@ In general, owing to the parent [XL-VLMs](https://github.com/mshukor/xl-vlms) re
 
 ### Feature Extraction
 
-The extraction of features from the two prompt completions and context vectors by running the bash scripts
-* For safety experiments: [src/examples/learned_steering/L2S/safety/0_extract_representations.sh](src/examples/learned_steering/L2S/safety/0_extract_representations.sh)
+The extraction of features from the two prompt completions and context vectors can all be performed by running the bash scripts
+* For safety experiments: 
+```
+cd learn-to-steer
+bash src/examples/learned_steering/L2S/safety/0_extract_representations.sh
+```
+
 * For hallucination experiments: 
 
-
+The bash scripts also contain details (through comments or otherwise) about arguments used for both models
 
 ### Training L2S
 
+Based on the extracted features, a L2S model can be trained by running the following bash scripts
+* For safety experiments: 
+```
+bash src/examples/learned_steering/L2S/safety/1_train_l2s.sh
+```
+* For hallucination experiments:
+
+Our pretrained L2S auxiliary networks for each base model are available in [src/assets/L2S](src/assets/L2S). <br>
+L2S network architecture and their training strategy is given in [src/analysis/learnable_model_steering.py](src/analysis/learnable_model_steering.py)
+
 ### Inference 
+
+Given a pretrained L2S model, inference can be performed with the following bash scripts
+```
+bash src/examples/learned_steering/L2S/safety/2_inference_with_l2s.sh
+OR 
+
+```
+
 
 ### Evaluation
 
