@@ -605,7 +605,7 @@ class MMSafetyBench(ImageTextDataset):
         else:
             instruction = text.strip()
             if 'use_safety_prompt' in kwargs and kwargs['use_safety_prompt']:
-                instruction = text.strip + safety_instruction
+                instruction = text.strip() + safety_instruction
             response = ""
             continue_final_message = False
 

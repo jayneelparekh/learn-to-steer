@@ -42,6 +42,9 @@ def inference_safety_steering(
 
     logger.info(f"\nSteering method used: {steering_method}")
     logger.info(f"Module to hook: {module_to_hook}")
+    safety_prompt_flag = ("prompt" == steering_method)
+    if safety_prompt_flag:
+        logger.info(f"Safety prompt usage is ON")
 
     start_time = time.time()
     count = 0
@@ -63,7 +66,8 @@ def inference_safety_steering(
                                                                                    forced_answer_true=args.forced_answer_true,
                                                                                    descriptive_answer=args.descriptive_answer,
                                                                                    scenario=scenario,
-                                                                                   **{'model_name':args.model_name_or_path},
+                                                                                   **{'model_name':args.model_name_or_path, 
+                                                                                      'use_safety_prompt':safety_prompt_flag},
                                                                                    )
         inputs = model_class.preprocessor(
             instruction=instruction_,
@@ -81,7 +85,7 @@ def inference_safety_steering(
         )
 
         # Get representation of interest
-        if steering_method in ["", "none", "default", "no-steering"]:
+        if steering_method in ["", "none", "default", "no-steering", "prompt"]:
             out = model.generate(
                 **inputs, max_new_tokens=args.max_new_tokens, do_sample=False, 
                 output_logits=perplexity_flag, return_dict_in_generate=perplexity_flag,
@@ -237,34 +241,6 @@ def inference(
         if "qwen" in args.model_name_or_path.lower() and "mmsb" in args.dataset_name and args.force_answer and args.split == "multi" and scenario in ["10-Legal_Opinion", "11-Financial_Advice", "12-Health_Consultation", "13-Gov_Decision"]: 
             # For Qwen on MMSafety, the steering vector for legal/financial/healthcare scenarios is extracted from second-last token
             item["end_of_input_index"] = input_len-1-1
-
-        # print()
-        # print(model_class.get_tokenizer().batch_decode(out[:, item["end_of_raw_input_index"]-1], skip_special_tokens=False))
-        # print(model_class.get_tokenizer().batch_decode(out[:, item["end_of_raw_input_index"]], skip_special_tokens=False))
-        # print(model_class.get_tokenizer().batch_decode(out[:, item["end_of_raw_input_index"]+1], skip_special_tokens=False))
-        # print()
-
-        """
-        ['assistant']                                                                                                      
-        ['\n']                                                                                                             
-        ['No'] 
-        """
-
-
-        # print()
-        # print(model_class.get_tokenizer().batch_decode(out[:, input_len-2], skip_special_tokens=False))
-        # print(model_class.get_tokenizer().batch_decode(out[:, input_len-1], skip_special_tokens=False))
-        # print(model_class.get_tokenizer().batch_decode(out[:, input_len], skip_special_tokens=False))
-        # print(model_class.get_tokenizer().batch_decode(out[:, input_len+1], skip_special_tokens=False))
-        # print()
-
-
-        """
-        ['assistant'] 
-        ['\n']                                                                                                             
-        ['No']                                                                                                             
-        [','] 
-        """
 
 
         if hook_return_functions is not None:

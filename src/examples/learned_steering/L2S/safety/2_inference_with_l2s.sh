@@ -33,7 +33,7 @@ for split in multi; do
 
     for steering_alpha in 2.2; do
 
-        for method in default; do
+        for method in l2s; do
             shift_vector_path=${STEER_MODEL_NAME}
             save_filename="${model}_${dataset_name}_steer_${method}_${split}_${steering_alpha}_${steer_model_base}.pth"
             #modules_to_hook="language_model.model.layers.30;language_model.model.layers.15" # Used for LLaVA experiments (MMSafety)
