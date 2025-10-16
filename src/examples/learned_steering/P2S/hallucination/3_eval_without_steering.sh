@@ -4,12 +4,10 @@ model=llava
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
 
-
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
 
-save_dir=/data/khayatan/Hallucination/POPE/hallucination
 dataset_name=pope_test
 dataset_size=-1
 
@@ -39,33 +37,22 @@ for split in adversarial popular random; do
 done
 
 
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_eval_no_steer_random_-1.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_eval_no_steer_random_-1_model_prediction.json
-
-"""
-
-
 
 
 # for Qwen2vlinstruct
-
-
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
 
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
+YOUR_CACHE_DIR=/data/khayatan/cache/
 
 
+cache_dir=${YOUR_CACHE_DIR}
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
 
-save_dir=/data/khayatan/Hallucination/POPE/hallucination
 dataset_name=pope_test
 dataset_size=-1
 
@@ -95,11 +82,3 @@ for split in adversarial popular random; do
         --seed 0
 done
 
-
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_eval_no_steer_random_-1.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_eval_no_steer_random_-1_model_prediction.json
-
-"""
