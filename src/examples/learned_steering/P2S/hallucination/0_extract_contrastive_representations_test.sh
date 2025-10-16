@@ -1,9 +1,12 @@
+# *********************************
+# CODE TO GENERATE THE POSITIVE (CORRECT) COMPLETIONS AND SAVING THEIR STATES
+# *********************************
 model_name_or_path=llava-hf/llava-1.5-7b-hf
 model=llava
 
 
-YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
-YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
+YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test # TO BE REPLACED WITH YOUR TEST DIR FOR POPE (NO OFFICIAL PARTITION)
+YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination # TO BE REPLACED WITH YOUR SAVE DIR FOR POPE
 
 
 data_dir=${YOUR_DATA_DIR}
@@ -39,7 +42,6 @@ for split in adversarial popular random; do
             --modules_to_hook $modules_to_hook \
             --generation_mode \
             --save_filename ${save_filename} \
-            --local_files_only \
             --force_answer \
             --forced_answer_true \
             --exact_match_modules_to_hook \
@@ -49,6 +51,10 @@ for split in adversarial popular random; do
 done
 
 
+
+# *********************************
+# CODE TO GENERATE THE NEGATIVE (INCORRECT) COMPLETIONS AND SAVING THEIR STATES
+# *********************************
 
 for split in adversarial popular random; do
 
@@ -71,7 +77,6 @@ for split in adversarial popular random; do
             --modules_to_hook $modules_to_hook \
             --generation_mode \
             --save_filename ${save_filename} \
-            --local_files_only \
             --force_answer \
             --exact_match_modules_to_hook \
             --end_special_tokens "</s>" \
@@ -94,11 +99,16 @@ done
 
 
 # for Qwen2vlinstruct
-
+# *********************************
+# CODE TO GENERATE THE POSITIVE (CORRECT) COMPLETIONS AND SAVING THEIR STATES
+# *********************************
 
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
+
+
+YOUR_CACHE_DIR=/data/khayatan/cache/
+cache_dir=${YOUR_CACHE_DIR}
 
 
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
@@ -149,6 +159,9 @@ done
 
 
 
+# *********************************
+# CODE TO GENERATE THE NEGATIVE (INCORRECT) COMPLETIONS AND SAVING THEIR STATES
+# *********************************
 for split in adversarial popular random; do
 
     for i in 17; do
