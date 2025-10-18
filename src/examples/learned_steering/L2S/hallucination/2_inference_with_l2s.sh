@@ -1,13 +1,17 @@
 model_name_or_path=llava-hf/llava-1.5-7b-hf
 model=llava
 
+
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
-STEER_MODEL_NAME=/home/khayatan/learnable_steering/xl-vlms/llava_14_average_all_pope_train_-1.pt
-steer_model_base=$(basename "$STEER_MODEL_NAME" .pt)
+STEER_MODEL_NAME=llava_14_average_all_pope_train_-1.pt
+
+
 
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
+steer_model_base=$(basename "$STEER_MODEL_NAME" .pt)
+
 
 
 dataset_name=pope_test
@@ -24,7 +28,8 @@ for split in adversarial popular random; do
     for i in 14; do
         shift_vector_path=${STEER_MODEL_NAME}
         save_filename="${model}_${dataset_name}_steer_${i}_yes_no_${split}_${steering_alpha}_${steer_model_base}"
-        modules_to_hook="language_model.model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
+
 
 
         python src/save_features.py \
@@ -53,32 +58,20 @@ done
 
 
 
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_steer_14_yes_no_adversarial_1_llava_14_average_all_pope_train_-1.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_steer_14_yes_no_adversarial_1_llava_14_average_all_pope_train_-1_model_prediction.json
-
-
-
-"""
-
-
-
-
 
 
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
-
 
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
-STEER_MODEL_NAME=/home/khayatan/learnable_steering/xl-vlms/qwen2vlinstruct_17_average_all_pope_train_-1.pt
+STEER_MODEL_NAME=qwen2vlinstruct_17_average_all_pope_train_-1.pt
 # STEER_MODEL_NAME=/home/khayatan/learnable_steering/xl-vlms/0.0001_1_5e-05_last_input_average_400_17.pt
 steer_model_base=$(basename "$STEER_MODEL_NAME" .pt)
+YOUR_CACHE_DIR=/data/khayatan/cache/
 
+
+cache_dir=${YOUR_CACHE_DIR}
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
@@ -93,13 +86,10 @@ hook_names=("shift_hidden_states_learned_steer" "hallucination_metrics") # shoul
 
 for split in adversarial popular random; do
 
-
-
-    # for i in 14; do
     for i in 17; do
         shift_vector_path=${STEER_MODEL_NAME}
         save_filename="${model}_${dataset_name}_steer_${i}_yes_no_${split}_${steering_alpha}_${steer_model_base}"
-        modules_to_hook="model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
 
 
         python src/save_features.py \
@@ -126,14 +116,5 @@ for split in adversarial popular random; do
     done
 done
 
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_steer_17_yes_no_adversarial_1_llava_17_average_all_pope_train_-1.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_steer_17_yes_no_adversarial_1_llava_17_average_all_pope_train_-1_model_prediction.json
-
-
-
-"""
 
 
