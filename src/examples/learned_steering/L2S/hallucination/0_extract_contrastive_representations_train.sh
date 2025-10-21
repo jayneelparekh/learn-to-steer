@@ -10,7 +10,6 @@ data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
 
-save_dir=/data/khayatan/Hallucination/POPE/hallucination
 dataset_name=pope_train
 dataset_size=-1
 
@@ -25,8 +24,8 @@ for split in all; do
 
     for i in 14; do
 
-        modules_to_hook="language_model.model.layers.${i}"
-        save_filename="${model}_${dataset_name}_features_pos_answers_${i}_${split}_all_train_${dataset_size}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
+        save_filename="${model}_${dataset_name}_${split}_features_pos_answers_${i}_${dataset_size}"
 
 
         python src/save_features.py \
@@ -57,8 +56,8 @@ for split in all; do
 
     for i in 14; do
 
-        modules_to_hook="language_model.model.layers.${i}"
-        save_filename="${model}_${dataset_name}_features_neg_answers_${i}_${split}_all_train_${dataset_size}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
+        save_filename="${model}_${dataset_name}_${split}_features_neg_answers_${i}_${dataset_size}"
 
 
         python src/save_features.py \
@@ -94,18 +93,16 @@ done
 
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
-
 
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/train
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
+YOUR_CACHE_DIR=/data/khayatan/cache/
 
 
+cache_dir=${YOUR_CACHE_DIR}
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
-
-save_dir=/data/khayatan/Hallucination/POPE/hallucination
 dataset_name=pope_train
 dataset_size=-1
 
@@ -120,8 +117,8 @@ for split in all; do
 
     for i in 17; do
 
-        modules_to_hook="model.layers.${i}"
-        save_filename="${model}_${dataset_name}_features_pos_answers_${i}_${split}_all_train_${dataset_size}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
+        save_filename="${model}_${dataset_name}_${split}_features_pos_answers_${i}_${dataset_size}"
 
 
         python src/save_features.py \
@@ -153,8 +150,8 @@ for split in all; do
 
     for i in 17; do
 
-        modules_to_hook="model.layers.${i}"
-        save_filename="${model}_${dataset_name}_features_neg_answers_${i}_${split}_all_train_${dataset_size}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
+        save_filename="${model}_${dataset_name}_${split}_features_neg_answers_${i}_${dataset_size}"
 
 
         python src/save_features.py \
@@ -180,10 +177,3 @@ done
 
 
 
-
-
-
-"""
-/data/khayatan/Hallucination/POPE/hallucination/features/save_hidden_states_for_l2s_qwen2vlinstruct_pope_train_features_neg_answers_14_all_all_train_-1.pth
-
-"""

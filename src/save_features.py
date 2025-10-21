@@ -199,7 +199,8 @@ def inference(
                                                                                    forced_answer_true=args.forced_answer_true,
                                                                                    descriptive_answer=args.descriptive_answer,
                                                                                    scenario=scenario,
-                                                                                   **{'model_name':args.model_name_or_path},
+                                                                                   **{'model_name':args.model_name_or_path, 
+                                                                                      'use_safety_prompt':args.use_safety_prompt},
                                                                                    )
         
         inputs = model_class.preprocessor(
@@ -225,11 +226,6 @@ def inference(
             item["model_predictions"] = model_class.get_tokenizer().batch_decode(
                 out[:, input_len:], skip_special_tokens=True
             )
-
-            # print(model_class.get_tokenizer().batch_decode(
-            #     out[:, :], skip_special_tokens=True
-            # ))
-            # print(item["response"])
 
 
         else:

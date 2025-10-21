@@ -2,11 +2,16 @@ model_name_or_path=llava-hf/llava-1.5-7b-hf
 model=llava
 
 
+YOUR_FEAT_DIR=/data/khayatan/Hallucination/POPE/hallucination/features # TO BE REPLACED WITH YOUR SAVE DIR FOR POPE/features
+YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors # TO BE REPLACED WITH YOUR SAVE DIR FOR POPE
+YOUR_CACHE_DIR=/data/khayatan/cache/ # TO BE REPLACED WITH THE DIR OF YOUR MODEL
 
-features_dir=/data/khayatan/Hallucination/POPE/hallucination/features
 
-shift_type=average
-save_dir=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors
+cache_dir=${YOUR_CACHE_DIR}
+features_dir=${YOUR_FEAT_DIR}
+save_dir=${YOUR_SAVE_DIR}
+
+shift_type=average # We use the average representation of generated tokens to compute the shift vector
 
 analysis_name=learnable_steering
 
@@ -18,8 +23,8 @@ for split in adversarial popular random; do
         pos_features_name=save_hidden_states_for_l2s_llava_pope_test_features_pos_answers_${i}_${split}_-1.pth
         neg_features_name=save_hidden_states_for_l2s_llava_pope_test_features_neg_answers_${i}_${split}_-1.pth
 
+        modules_to_hook="model.language_model.layers.${i};model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
 
-        modules_to_hook="language_model.model.layers.${i};language_model.model.layers.${i}"
         save_filename=${split}_pope_test_-1
 
 
@@ -36,10 +41,6 @@ for split in adversarial popular random; do
     done
 done
 
-"""
-Saving individual shift vectors in : 
-/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/llava_14_average_random_pope_test_-1.pth
-"""
 
 
 
@@ -49,13 +50,17 @@ Saving individual shift vectors in :
 
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
 
-features_dir=/data/khayatan/Hallucination/POPE/hallucination/features
+YOUR_FEAT_DIR=/data/khayatan/Hallucination/POPE/hallucination/features # TO BE REPLACED WITH YOUR SAVE DIR FOR POPE/features
+YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors # TO BE REPLACED WITH YOUR SAVE DIR FOR POPE
+YOUR_CACHE_DIR=/data/khayatan/cache/ # TO BE REPLACED WITH THE DIR OF YOUR MODEL
+
+
+cache_dir=${YOUR_CACHE_DIR}
+features_dir=${YOUR_FEAT_DIR}
+save_dir=${YOUR_SAVE_DIR}
 
 shift_type=average
-save_dir=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors
-
 analysis_name=learnable_steering
 
 
@@ -66,7 +71,7 @@ for split in adversarial popular random; do
         pos_features_name=save_hidden_states_for_l2s_qwen2vlinstruct_pope_test_features_pos_answers_${i}_${split}_-1.pth
         neg_features_name=save_hidden_states_for_l2s_qwen2vlinstruct_pope_test_features_neg_answers_${i}_${split}_-1.pth
 
-        modules_to_hook="model.layers.${i};model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i};model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
         save_filename=${split}_pope_test_-1
 
 
@@ -84,3 +89,18 @@ for split in adversarial popular random; do
     done
 done
 
+
+
+
+
+
+"""
+Saving individual shift vectors in : 
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/llava_14_average_random_pope_test_-1.pth
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/llava_14_average_popular_pope_test_-1.pth
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/llava_14_average_adversarial_pope_test_-1.pth
+
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/qwen_17_average_random_pope_test_-1.pth
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/qwen_17_average_popular_pope_test_-1.pth
+/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/qwen_17_average_adversarial_pope_test_-1.pth
+"""

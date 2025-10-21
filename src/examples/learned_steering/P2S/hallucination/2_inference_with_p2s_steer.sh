@@ -3,17 +3,23 @@ model=llava
 
 YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
 YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
+YOUR_CACHE_DIR=/data/khayatan/cache/
 
+
+cache_dir=${YOUR_CACHE_DIR}
 data_dir=${YOUR_DATA_DIR}
 save_dir=${YOUR_SAVE_DIR}
 
 
-# should figure out two separate evaluations: one for p2s and one for mean
+
+# the script for adding and evaluating the mean steering vector is in : learn-to-steer/src/examples/learned_steering/L2S/hallucination/3_inference_with_mean_steer.sh
 
 dataset_name=pope_test
 dataset_size=-1
 max_new_tokens=128
 steering_alpha=1
+shift_type=average
+
 hook_names=("shift_hidden_states_add" "hallucination_metrics")
 shift_vector_key=steering_vector
 
@@ -23,9 +29,9 @@ for subset in adversarial popular random; do
     for steering_alpha in 1; do
 
         for i in 14; do
-            shift_vector_path=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/${model}_${i}_average_${subset}_${dataset_name}_${dataset_size}.pth
+            shift_vector_path=${save_dir}/shift_vectors/${model}_${i}_${shift_type}_${subset}_${dataset_name}_${dataset_size}.pth
             save_filename="${model}_${dataset_name}_steer_${i}_yes_no_${subset}_${steering_alpha}_p2s"
-            modules_to_hook="language_model.model.layers.${i}"
+            modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
 
 
             python src/save_features.py \
@@ -56,30 +62,14 @@ done
 
 
 
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_steer_14_yes_no_random_1_p2s.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_llava_pope_test_steer_14_yes_no_random_1_p2s_model_prediction.json
-"""
-
-
 
 # for Qwen2vlinstruct
-
-
 model_name_or_path=Qwen/Qwen2-VL-7B-Instruct
 model=qwen2vlinstruct
-cache_dir=/data/khayatan/cache/
-
-YOUR_DATA_DIR=/data/khayatan/datasets/POPE/test
-YOUR_SAVE_DIR=/data/khayatan/Hallucination/POPE/hallucination
-
-data_dir=${YOUR_DATA_DIR}
-save_dir=${YOUR_SAVE_DIR}
 
 
-# should figure out two separate evaluations: one for p2s and one for mean
+
+# the script for adding and evaluating the mean steering vector is in : learn-to-steer/src/examples/learned_steering/L2S/hallucination/3_inference_with_mean_steer.sh
 
 dataset_name=pope_test
 dataset_size=-1
@@ -96,7 +86,7 @@ for subset in adversarial popular random; do
         for i in 17; do
             shift_vector_path=/data/khayatan/Hallucination/POPE/hallucination/shift_vectors/${model}_${i}_average_${subset}_${dataset_name}_${dataset_size}.pth
             save_filename="${model}_${dataset_name}_steer_${i}_yes_no_${subset}_${steering_alpha}_p2s"
-            modules_to_hook="model.layers.${i}"
+            modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
 
 
             python src/save_features.py \
@@ -127,10 +117,3 @@ done
 
 
 
-
-"""
-Saving data to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_steer_17_yes_no_random_1_p2s.json
-Saving 643 predictions to: 
-/data/khayatan/Hallucination/POPE/hallucination/hallucination_metrics_qwen2vlinstruct_pope_test_steer_17_yes_no_random_1_p2s_model_prediction.json
-"""

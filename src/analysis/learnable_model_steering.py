@@ -6,6 +6,7 @@ from typing import Any, Callable, Dict, List, Tuple
 import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import Dataset
 from sklearn.cluster import KMeans
 import torch.optim as optim
@@ -167,6 +168,19 @@ class LearnableSteering:
                    os.path.join(self.save_dir, self.steering_file_base + "_mean.pth"))
         
         self.logger.info(f"Saving mean shift vectors in : {os.path.join(self.save_dir, self.steering_file_base + '_mean.pth')}")
+
+
+        # Save random-based vector
+        magnitudes = (pos_hidden_states-neg_hidden_states).norm(dim=-1, keepdim=True)
+        random_directions = torch.randn_like(pos_hidden_states)
+        random_unit_vectors = F.normalize(random_directions, dim=-1)
+
+        # Scale unit vectors to match original magnitudes
+        random_shift_vectors = random_unit_vectors * magnitudes
+        torch.save({"steering_vector": random_shift_vectors},
+                   os.path.join(self.save_dir, self.steering_file_base + "_random.pth"))
+        
+        self.logger.info(f"Saving random shift vectors in : {os.path.join(self.save_dir, self.steering_file_base + '_random.pth')}")
 
 
     def train_model(self):

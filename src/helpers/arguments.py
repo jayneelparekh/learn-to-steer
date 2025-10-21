@@ -368,6 +368,14 @@ def get_arguments():
     )
 
 
+    parser.add_argument(
+        "--use_safety_prompt",
+        action="store_true",
+        default=False,
+        help="Whether the instruction should include an added prompt to motivate taks performance depending on the dataset.",
+    )
+
+
 
     # Evaluation
     parser.add_argument(

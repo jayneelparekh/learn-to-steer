@@ -26,6 +26,7 @@ Please refer to [docs/installation.md](docs/installation.md) for environment ins
 
 * The MMSafetyBench dataset can be downloaded at [this link](https://github.com/isXinLiu/MM-SafetyBench)
 * The POPE dataset can be downloaded at [this link](https://github.com/RUCAIBox/POPE)
+* Our decomposition of POPE into test and train can be found at [this link](https://drive.google.com/drive/folders/1i324D_5KJkjMVlBt9MjYZLxDcsIfD9ct?usp=drive_link)
 
 We encourage checking out [src/datasets/image_text_dataset.py](src/datasets/image_text_dataset.py) for details about the dataset classes. The prompt completions depending upon the input are also defined there.
 
@@ -35,7 +36,7 @@ Our experiments in the paper are on the following models:
 * **LLaVA-v1.5-7b**
 * **Qwen2-VL-7B-Instruct**
 
-In general, owing to the parent [XL-VLMs](https://github.com/mshukor/xl-vlms) repo we support models from the `transformers` library.
+In general, owing to the parent [XL-VLMs](https://github.com/mshukor/xl-vlms) repo, we support models from the `transformers` library.
 
 ## Main Experiments
 
@@ -49,6 +50,10 @@ bash src/examples/learned_steering/L2S/safety/0_extract_representations.sh
 ```
 
 * For hallucination experiments: 
+```
+cd learn-to-steer
+bash src/examples/learned_steering/hallucination/safety/0_extract_contrastive_representations_train.sh
+```
 
 The bash scripts also contain details (through comments or otherwise) about arguments used for both models
 
@@ -60,6 +65,9 @@ Based on the extracted features, a L2S model can be trained by running the follo
 bash src/examples/learned_steering/L2S/safety/1_train_l2s.sh
 ```
 * For hallucination experiments:
+```
+bash src/examples/learned_steering/L2S/hallucination/1_train_l2s.sh
+```
 
 Our pretrained L2S auxiliary networks for each base model are available in [src/assets/L2S](src/assets/L2S). <br>
 L2S network architecture and their training strategy is given in [src/analysis/learnable_model_steering.py](src/analysis/learnable_model_steering.py)
@@ -75,9 +83,22 @@ bash src/examples/learned_steering/L2S/hallucination/2_inference_with_l2s.sh
 
 ### Evaluation
 
+* For safety experiments: 
 Given a file containing generated responses, use the following bash scripts for evaluation for safety experiments
 ```
 bash src/examples/learned_steering/L2S/safety/3_response_eval.sh
+```
+
+* For hallucination experiments:
+The evaluation can be done by including ```hallucination_metrics``` in the list of hooks in the scripts
+Baselines that can be evaluated: *P2S*, *Mean*, *Random*, *Prompt*, *No steering*
+For example for evaating (and generating) for *Prompt* baseline:
+```
+bash src/examples/learned_steering/P2S/hallucination/5_inference_with_good_prompt.sh
+```
+or *Mean* baseline:
+```
+bash src/examples/learned_steering/L2S/hallucination/3_inference_with_mean_steer.sh
 ```
 
 ## Citations

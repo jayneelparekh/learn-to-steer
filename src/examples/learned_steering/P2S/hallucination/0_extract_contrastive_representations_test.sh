@@ -24,8 +24,7 @@ for split in adversarial popular random; do
 
     for i in 14; do
 
-        modules_to_hook="model.layers.${i}"
-        modules_to_hook="language_model.model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
         save_filename="${model}_${dataset_name}_features_pos_answers_${i}_${split}_${dataset_size}"
 
 
@@ -60,8 +59,7 @@ for split in adversarial popular random; do
 
     for i in 14; do
 
-        modules_to_hook="model.layers.${i}"
-        modules_to_hook="language_model.model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): language_model.model.layers.${i}
         save_filename="${model}_${dataset_name}_features_neg_answers_${i}_${split}_${dataset_size}"
 
 
@@ -130,7 +128,7 @@ for split in adversarial popular random; do
 
     for i in 17; do
 
-        modules_to_hook="model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
         save_filename="${model}_${dataset_name}_features_pos_answers_${i}_${split}_${dataset_size}"
 
 
@@ -166,7 +164,7 @@ for split in adversarial popular random; do
 
     for i in 17; do
 
-        modules_to_hook="model.layers.${i}"
+        modules_to_hook="model.language_model.layers.${i}" # for previous transformer versions (4.47.1 for instance): model.layers.${i}
         save_filename="${model}_${dataset_name}_features_neg_answers_${i}_${split}_${dataset_size}"
 
 
