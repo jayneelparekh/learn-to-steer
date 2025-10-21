@@ -344,6 +344,9 @@ class POPE_test_Dataset(ImageTextDataset):
         **kwargs: Any,
     ) -> tuple[str, str, bool]:
         
+        safety_instruction = "Examine the image carefully and answer: "
+
+        
         if force_answer:
             if forced_answer_true:
                 instruction=text
@@ -361,6 +364,9 @@ class POPE_test_Dataset(ImageTextDataset):
                 continue_final_message = False
 
             else:
+                if 'use_safety_prompt' in kwargs and kwargs['use_safety_prompt']:
+                    text = safety_instruction + text
+    
                 instruction = text
                 response = ""
                 continue_final_message = False
