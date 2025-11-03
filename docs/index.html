@@ -66,6 +66,34 @@
           max-width: 300px;
         }
       }
+
+      .ref-link {
+    position: relative;
+    text-decoration: none;
+    }
+  
+    .ref-link .tooltip {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #b49347;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85em;
+    }
+  
+    .ref-link:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    }
     </style>
   </head>
   
@@ -119,7 +147,7 @@
     <div class="gap-10"></div>
     
     <ul style="font-size:19px">
-      <li> This work is on steering for multimodal LLMs (MLLMs). The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer in different directions depending upon input context.</li>
+      <li> This work is on steering for <b>Multimodal LLMs (MLLMs)</b>. The central theme in our work is that a steering behavior can instantiate itself differently for different inputs. This motivates the need to steer in different directions depending upon input context.</li>
       <div class="gap-10"></div>
       <li> We first propose <a href="#p2s" style="color:rgb(172, 138, 30)"><b><u>Prompt-to-Steer (P2S)</u></b></a>, a type of contrastive steering method which demonstrates that if the behavior instantiation is known in advance, one can use input specific contrastive prompts to extract and steer the given input directly.</li>
       <div class="gap-10"></div>
@@ -152,12 +180,12 @@
 
     <p style="font-size:19px">
     <i>Representation steering</i> refers to the idea of intervening on the internal representations in order to "align" the output with certain desired behaviors. 
-       For computer vision enthusiasts, in principle, it's similar to a class of image editing approaches where one intervenes on the latent representations of image generative models to control the output "style".
+       For computer vision enthusiasts, in principle, it's similar to a class of image editing approaches where one intervenes on the latent representations of image generative models to control the output "style" <sup><a href="#ref1" id="cite1" class="ref-link">[1, 2]</a></sup>.
     </p>
 
     <p style="font-size:19px">
     For a given desired behavior (eg. sycophancy), most current steering approaches involve contrasting representations between two sets of samples, one that aligns with the given behavior, and the other that doesn't. 
-    Subsequently, one extracts mean-of-difference or difference-of-means between the two sets of representations as a single steering vector to induce desired behavior. Some cool recent work applies a steering vector conditionally. Nevertheless, the direction of steering does not change with input.
+    Subsequently, one extracts mean-of-difference or difference-of-means between the two sets of representations as a single steering vector to induce desired behavior <sup><a href="#ref3" id="cite3" class="ref-link">[3-7]</a></sup>. Some cool recent work applies a steering vector conditionally <sup><a href="#ref8" id="cite8" class="ref-link">[8]</a></sup>. Nevertheless, the direction of steering does not change with input.
     </p>
 
     <p style="font-size:19px">
@@ -166,7 +194,7 @@
     One could steer so that the model refuses a user query regardless of the scenario, which would ensure a safe response. However, safety can mean different things depending upon input context.  
     It would entail refusal for queries asking about performing harmful/illegal activities. 
     But for legal/financial/healthcare queries, what is arguably more essential is not refusal but that response should recommend (atleast at some point) to defer the user to consult a human expert (lawyer/doctor etc.)
-    This can be regarded as a subjective opinion about desired model behave, and that is precisely the point!
+    This can be regarded as a subjective opinion about desired model behavior, and that is precisely the point! The desired behavior varies according to user preferences and can also reflect for type of input at hand. 
     This motivated us to propose a method that for a given goal, can flexibly steer in different directions, according to the input context. 
     </p>
 
@@ -339,6 +367,14 @@
 
 
 
+
+
+<h2>References</h2>
+<ol>
+  <li id="ref1"> Kingma, D. P. and Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114. <a href="#cite1">↩</a></li>
+  <li id="ref2"> Shen, Y., Yang, C., Tang, X., and Zhou, B. (2020). Interfacegan: Interpreting the disentangled face representation learned by gans. IEEE TPAMI. <a href="#cite1">↩</a></li>
+
+</ol>
 
   </body>
   
