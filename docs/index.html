@@ -165,12 +165,11 @@
 
 
     <div class="gap-20"></div>
+    <div class="gap-20"></div>
 
     <hr>
 
-    <p style="font-size:19px">
-    <b>Note:</b> The page is still being updated. References for various sources will be added soon.
-    </p>
+    <div class="gap-20"></div>
 
     <b><span style="font-size:36px; color:rgb(75, 15, 101)"> 
       Background and Motivation
@@ -284,14 +283,14 @@
     <div class="gap-10"></div>
 
     <p style="font-size:19px">
-      We test our method for safety enforcement and hallucination mitigation tasks on LLaVA-v1.5. 
-      The safety enforcement experiments are conducted on MMSafetyBench dataset, while hallucination experimnents are on primarily on POPE dataset.
-      Additional experiments with Qwen2-VL-7B-Instruct on both benchmarks, and LLaVA-v1.5 on VLGuard dataset for safety enforcement will be added soon in updated version of our paper. 
+      We test our method for safety enforcement and hallucination mitigation tasks on LLaVA-v1.5 <sup><a href="#ref9" id="cite9" class="ref-link">[9]</a></sup> and Qwen2-VL-7B-Instruct <sup><a href="#ref10" id="cite10" class="ref-link">[10]</a></sup>. 
+      The safety enforcement experiments are conducted on MMSafetyBench (primary) <sup><a href="#ref11" id="cite11" class="ref-link">[11]</a></sup> and VLGuard <sup><a href="#ref12" id="cite12" class="ref-link">[12]</a></sup> datasets, while hallucination experimnents are on primarily on POPE (primary) <sup><a href="#ref13" id="cite13" class="ref-link">[13]</a></sup>, COCO <sup><a href="#ref14" id="cite14" class="ref-link">[14]</a></sup> datasets. 
+      Please refer to the paper for further details. 
     </p>
 
     <p style="font-size:19px">
       <b>Baselines:</b> The primary baseline for <b>L2S</b>, <b>P2S</b> methods is the mean-steering (<b>Mean-S</b>) method that uses \(\mathbb{E}(z_{X, L^*})\) as the fixed steering vector. 
-      As before, for precise details, please refer to the paper.
+      As before, for further info about other baselines and more precise details, please refer to the paper.
     </p>
 
     <div class="gap-10"></div>
@@ -373,8 +372,38 @@
 <ol>
   <li id="ref1"> Kingma, D. P. and Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114. <a href="#cite1">↩</a></li>
   <li id="ref2"> Shen, Y., Yang, C., Tang, X., and Zhou, B. (2020). Interfacegan: Interpreting the disentangled face representation learned by gans. IEEE TPAMI. <a href="#cite1">↩</a></li>
-
+  <li id="ref3"> Panickssery, N., Gabrieli, N., Schulz, J., Tong, M., Hubinger, E., and Turner, A. M. (2023). Steering llama 2 via contrastive activation addition. arXiv preprint arXiv:2312.06681. <a href="#cite3">↩</a></li>
+  <li id="ref4"> Turner, A. M., Thiergart, L., Leech, G., Udell, D., Vazquez, J. J., Mini, U., and MacDiarmid, M. (2023). Activation addition: Steering language models without optimization. arXiv e-prints, pages arXiv–2308. <a href="#cite3">↩</a></li>
+  <li id="ref5"> Arditi, A., Obeso, O., Syed, A., Paleka, D., Panickssery, N., Gurnee, W., and Nanda, N. (2024). Refusal in language models is mediated by a single direction. NeurIPS 2024. <a href="#cite3">↩</a></li>
+  <li id="ref6"> Khayatan, P., Shukor, M., Parekh, J., Dapogny, A., and Cord, M. (2025). Analyzing fine-tuning representation shift for multimodal llms steering alignment. ICCV 2025. <a href="#cite3">↩</a></li>
+  <li id="ref7"> Li, Q., Geng, J., Chen, Z., Song, K., Ma, L., and Karray, F. (2025). Internal activation revision: Safeguarding vision language models without parameter update. arXiv preprint arXiv:2501.16378 <a href="#cite3">↩</a></li>
+  <li id="ref8"> Lee, B. W., Padhi, I., Ramamurthy, K. N., Miehling, E., Dognin, P., Nagireddy, M., and Dhurandhar, A. (2025). Programming refusal with conditional activation steering. ICLR 2025. <a href="#cite8">↩</a></li>
+  <li id="ref9"> Liu, H., Li, C., Li, Y., and Lee, Y. J. (2024). Improved baselines with visual instruction tuning. CVPR 2024 <a href="#cite9">↩</a></li>
+  <li id="ref10"> Wang, P., Bai, S., Tan, S., Wang, S., Fan, Z., Bai, J., Chen, K., Liu, X., Wang, J., Ge, W., et al. (2024b). Qwen2-vl: Enhancing vision-language model’s perception of the world at any resolution. arXiv preprint arXiv:2409.12191. <a href="#cite10">↩</a></li>
+  <li id="ref11"> Liu, X., Zhu, Y., Gu, J., Lan, Y., Yang, C., and Qiao, Y. (2024b). Mm-safetybench: A benchmark for safety evaluation of multimodal large language models. ECCV 2024. <a href="#cite11">↩</a></li>
+  <li id="ref12"> Zong, Y., Bohdal, O., Yu, T., Yang, Y., and Hospedales, T. (2024). Safety fine-tuning at (almost) no cost: A baseline for vision large language models. ICML 2024. <a href="#cite12">↩</a></li>
+  <li id="ref13"> Li, Y., Du, Y., Zhou, K., Wang, J., Zhao, W. X., and rong Wen, J. (2023). Evaluating object hallucination in large vision-language models. EMNLP 2023 <a href="#cite13">↩</a></li>
+  <li id="ref14"> Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Doll´ar, P., and Zitnick, C. L. (2014). Microsoft coco: Common objects in context. ECCV 2014. <a href="#cite14">↩</a></li>
+  
 </ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </body>
   
